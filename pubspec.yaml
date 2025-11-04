@@ -1,0 +1,29 @@
+name: hasab_ai_flutter
+description: "A comprehensive Flutter SDK for Hasab AI - speech-to-text, text-to-speech, translation, and chat capabilities for Ethiopian languages."
+version: 1.0.0
+homepage: https://hasab.co
+repository: https://github.com/hasabai/hasab_ai_flutter
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.0
+  flutter_sound: ^9.11.2
+  just_audio: ^0.9.40
+  path_provider: ^2.1.4
+  permission_handler: ^11.3.1
+  dio: ^5.7.0
+  equatable: ^2.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  mockito: ^5.4.4
+  build_runner: ^2.4.13
+
+flutter:
+  uses-material-design: true
