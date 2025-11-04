@@ -27,7 +27,7 @@ Future<void> transcribeFromFile(HasabAI hasab) async {
 
     final response = await hasab.speechToText.transcribe(
       audioFile,
-      language: 'amh', // or 'oro', 'tir', 'eng', 'auto'
+      language: 'amh', // or 'orm', 'tir', 'eng', 'auto'
       translate: false,
       summarize: false,
       isMeeting: false,
@@ -55,7 +55,8 @@ Future<void> transcribeAndTranslateFromFile(HasabAI hasab) async {
     final response = await hasab.speechToText.transcribeAndTranslate(
       audioFile,
       targetLanguage: HasabLanguage.english,
-      sourceLanguage: HasabLanguage.amharic, // optional, auto-detected if not provided
+      sourceLanguage:
+          HasabLanguage.amharic, // optional, auto-detected if not provided
       summarize: false,
       isMeeting: false,
     );

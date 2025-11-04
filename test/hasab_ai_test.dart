@@ -23,13 +23,13 @@ void main() {
     });
 
     test('Language enum works correctly', () {
-      expect(HasabLanguage.amharic.code, 'am');
-      expect(HasabLanguage.oromo.code, 'om');
-      expect(HasabLanguage.tigrinya.code, 'ti');
-      expect(HasabLanguage.english.code, 'en');
+      expect(HasabLanguage.amharic.code, 'amh');
+      expect(HasabLanguage.oromo.code, 'orm');
+      expect(HasabLanguage.tigrinya.code, 'tir');
+      expect(HasabLanguage.english.code, 'eng');
 
-      expect(HasabLanguage.fromCode('am'), HasabLanguage.amharic);
-      expect(HasabLanguage.fromCode('EN'), HasabLanguage.english);
+      expect(HasabLanguage.fromCode('amh'), HasabLanguage.amharic);
+      expect(HasabLanguage.fromCode('ENG'), HasabLanguage.english);
     });
 
     test('Translation service is accessible', () {
@@ -155,8 +155,8 @@ void main() {
 
       final json = request.toJson();
       expect(json['text'], 'Hello');
-      expect(json['from'], 'en');
-      expect(json['to'], 'am');
+      expect(json['from'], 'eng');
+      expect(json['to'], 'amh');
     });
 
     test('ChatRequest creates correctly', () {

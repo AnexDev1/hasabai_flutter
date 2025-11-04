@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Language codes: amh (Amharic), oro (Oromo), tir (Tigrinya), eng (English)',
+                    'Language codes: amh (Amharic), orm (Oromo), tir (Tigrinya), eng (English)',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.green.shade800,
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'TTS Speakers: 15 voices available across all languages',
+                    'TTS: 15 voices in Amharic, Oromo, Tigrinya & English',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.green.shade800,
@@ -429,14 +429,16 @@ class _TextToSpeechDemoState extends State<TextToSpeechDemo> {
       setState(() {
         _availableSpeakers = speakers;
       });
+      print('✅ Loaded TTS speakers: $speakers');
     } catch (e) {
-      // Use default speakers if API call fails
+      print('❌ Failed to load TTS speakers: $e');
+      // Use API-verified speakers as fallback (including Oromo and English)
       setState(() {
         _availableSpeakers = {
           'amh': ['hanna', 'selam', 'aster', 'yared', 'haile', 'bekele'],
-          'oro': ['gallete', 'abdi', 'tolla'],
+          'orm': ['gallete', 'abdi', 'tolla'], // Now matches API response
           'tir': ['yeha', 'selam', 'aster', 'yared', 'haile', 'bekele'],
-          'eng': ['default'],
+          'eng': ['default'], // English TTS may work with default voice
         };
       });
     }
@@ -508,12 +510,17 @@ class _TextToSpeechDemoState extends State<TextToSpeechDemo> {
               labelText: 'Language',
               border: OutlineInputBorder(),
             ),
-            items: HasabLanguage.values.map((lang) {
-              return DropdownMenuItem(
-                value: lang,
-                child: Text(lang.displayName),
-              );
-            }).toList(),
+            items: HasabLanguage.values
+                .where(
+                  (lang) => _availableSpeakers.containsKey(lang.code),
+                ) // Only show languages with TTS support
+                .map((lang) {
+                  return DropdownMenuItem(
+                    value: lang,
+                    child: Text(lang.displayName),
+                  );
+                })
+                .toList(),
             onChanged: (value) {
               if (value != null) {
                 setState(() {
@@ -838,7 +845,7 @@ class _FullWorkflowDemoState extends State<FullWorkflowDemo> {
     'Record Voice',
     'Transcribe',
     'Translate',
-    'Text-to-Speech',
+    'Text-to-Speech (if supported)',
     'Chat',
   ];
 
@@ -868,6 +875,16 @@ class _FullWorkflowDemoState extends State<FullWorkflowDemo> {
           if (_translatedText.isEmpty) {
             throw Exception('No translated text for TTS');
           }
+
+          // Check if target language supports TTS
+          final availableSpeakers = await widget.hasab.textToSpeech
+              .getAvailableVoices();
+          if (!availableSpeakers.containsKey(_targetLanguage.code)) {
+            throw Exception(
+              '${_targetLanguage.displayName} TTS is not supported by Hasab AI. Try Amharic, Oromo, or Tigrinya.',
+            );
+          }
+
           final tts = await widget.hasab.textToSpeech.synthesize(
             _translatedText,
             _targetLanguage,

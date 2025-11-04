@@ -4,7 +4,7 @@ enum HasabLanguage {
   amharic('amh', 'Amharic'),
 
   /// Oromo language
-  oromo('oro', 'Oromo'),
+  oromo('orm', 'Oromo'), // Fixed: was 'oro', should be 'orm' (ISO 639-3)
 
   /// Tigrinya language
   tigrinya('tir', 'Tigrinya'),
@@ -12,7 +12,7 @@ enum HasabLanguage {
   /// English language
   english('eng', 'English');
 
-  /// Language code (ISO 639-1)
+  /// Language code (ISO 639-3)
   final String code;
 
   /// Language display name

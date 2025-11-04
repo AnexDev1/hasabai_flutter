@@ -23,7 +23,9 @@ Future<void> testTranscription(HasabAI hasab) async {
     if (!await testAudioFile.exists()) {
       // Create a minimal test file (this won't work for real transcription)
       await testAudioFile.writeAsBytes([0, 1, 2, 3, 4, 5]); // dummy data
-      print('⚠️  Created dummy test file. Real tests should use actual audio files.\n');
+      print(
+        '⚠️  Created dummy test file. Real tests should use actual audio files.\n',
+      );
     }
 
     final response = await hasab.speechToText.transcribe(

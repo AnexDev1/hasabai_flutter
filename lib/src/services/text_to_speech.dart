@@ -113,6 +113,16 @@ class TextToSpeechService {
         }
       });
 
+      // If no speakers found, provide defaults for known working languages
+      if (voices.isEmpty) {
+        return {
+          'amh': ['hanna', 'selam'],
+          'orm': ['gallete'], // Fixed to match API
+          'tir': ['yeha'],
+          'eng': ['default'],
+        };
+      }
+
       return voices;
     } catch (e) {
       if (e is HasabException) {

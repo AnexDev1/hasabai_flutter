@@ -77,6 +77,12 @@ void main() async {
         '   Available languages: ${(data['languages'] as Map).keys.toList()}',
       );
       print('   Total speakers: ${data['total_speakers']}');
+
+      // Show speakers for each language
+      final languages = data['languages'] as Map<String, dynamic>;
+      languages.forEach((lang, speakers) {
+        print('   $lang: $speakers');
+      });
     } else {
       print('   ❌ Failed with code ${response.statusCode}');
     }
