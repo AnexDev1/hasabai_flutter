@@ -72,7 +72,13 @@ class _ChatWidgetState extends State<ChatWidget> {
 
       setState(() {
         _messages.clear();
-        _messages.addAll(history.messages);
+        // Find the conversation with the matching ID and get its messages
+        final conversation = history.history
+            .where((conv) => conv.id.toString() == _currentConversationId)
+            .firstOrNull;
+        if (conversation != null) {
+          _messages.addAll(conversation.messages);
+        }
       });
 
       _scrollToBottom();

@@ -437,47 +437,82 @@ class ChatResponse extends Equatable implements HasabResponse {
   ];
 }
 
-/// Response model for chat history
-class ChatHistoryResponse extends Equatable implements HasabResponse {
-  /// List of chat messages
+/// Model for a chat conversation
+class ChatConversation extends Equatable {
+  /// Conversation ID
+  final int id;
+
+  /// Conversation title
+  final String title;
+
+  /// Creation timestamp
+  final DateTime createdAt;
+
+  /// List of messages in the conversation
   final List<ChatMessage> messages;
 
-  /// Conversation ID
-  final String conversationId;
-
-  /// Total message count
-  final int totalCount;
-
-  const ChatHistoryResponse({
+  const ChatConversation({
+    required this.id,
+    required this.title,
+    required this.createdAt,
     required this.messages,
-    required this.conversationId,
-    required this.totalCount,
   });
 
-  factory ChatHistoryResponse.fromJson(Map<String, dynamic> json) {
-    return ChatHistoryResponse(
+  factory ChatConversation.fromJson(Map<String, dynamic> json) {
+    return ChatConversation(
+      id: json['id'] as int,
+      title: json['title'] as String? ?? 'Untitled Chat',
+      createdAt: DateTime.parse(json['created_at'] as String),
       messages: (json['messages'] as List<dynamic>)
           .map(
             (msg) =>
                 ChatMessage.fromJson(Map<String, dynamic>.from(msg as Map)),
           )
           .toList(),
-      conversationId: json['conversation_id']?.toString() ?? '',
-      totalCount: json['total_count'] as int? ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'created_at': createdAt.toIso8601String(),
+      'messages': messages.map((msg) => msg.toJson()).toList(),
+    };
+  }
+
+  @override
+  List<Object?> get props => [id, title, createdAt, messages];
+}
+
+/// Response model for chat history
+class ChatHistoryResponse extends Equatable implements HasabResponse {
+  /// List of chat conversations
+  final List<ChatConversation> history;
+
+  const ChatHistoryResponse({required this.history});
+
+  factory ChatHistoryResponse.fromJson(Map<String, dynamic> json) {
+    final historyList = json['history'] as List<dynamic>? ?? [];
+
+    return ChatHistoryResponse(
+      history: historyList
+          .map(
+            (conv) => ChatConversation.fromJson(
+              Map<String, dynamic>.from(conv as Map),
+            ),
+          )
+          .toList(),
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return {
-      'messages': messages.map((msg) => msg.toJson()).toList(),
-      'conversation_id': conversationId,
-      'total_count': totalCount,
-    };
+    return {'history': history.map((conv) => conv.toJson()).toList()};
   }
 
   @override
-  List<Object?> get props => [messages, conversationId, totalCount];
+  List<Object?> get props => [history];
 }
 
 /// Individual chat message

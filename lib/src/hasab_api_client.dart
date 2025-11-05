@@ -162,12 +162,14 @@ class HasabApiClient {
       print('📤 Field name: $fileFieldName');
       print('📤 Additional fields: $additionalFields');
 
-      // Build form data, converting booleans to string "1" or "0"
+      // Build form data, converting booleans to strings
       final Map<String, dynamic> formFields = {};
       if (additionalFields != null) {
         additionalFields.forEach((key, value) {
           if (value is bool) {
-            formFields[key] = value ? 'true' : 'false';
+            formFields[key] = value
+                ? 'true'
+                : 'false'; // API expects string booleans
           } else {
             formFields[key] = value.toString();
           }
