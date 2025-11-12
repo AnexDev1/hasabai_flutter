@@ -51,11 +51,7 @@ class HasabAI {
   ///
   /// [apiKey] Your Hasab AI API key
   /// [baseUrl] Optional custom base URL (defaults to https://hasab.co/api/v1)
-  HasabAI({required String apiKey, String? baseUrl})
-    : _client = HasabApiClient(
-        apiKey: apiKey,
-        baseUrl: baseUrl ?? 'https://hasab.co/api/v1',
-      ) {
+  HasabAI({required String apiKey}) : _client = HasabApiClient(apiKey: apiKey) {
     speechToText = SpeechToTextService(_client);
     textToSpeech = TextToSpeechService(_client);
     translation = TranslationService(_client);
@@ -79,9 +75,7 @@ class HasabAI {
       );
     }
 
-    final baseUrl = Platform.environment['HASAB_API_BASE_URL'];
-
-    return HasabAI(apiKey: apiKey, baseUrl: baseUrl);
+    return HasabAI(apiKey: apiKey);
   }
 
   /// Dispose and clean up resources

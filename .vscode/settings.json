@@ -8,5 +8,8 @@
     "**/node_modules/**": true,
     "**/.vscode/**": true
   },
-  "cmake.ignoreCMakeListsMissing": true
+  "cmake.ignoreCMakeListsMissing": true,
+  "cSpell.words": [
+    "hasab"
+  ]
 }
