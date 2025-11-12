@@ -39,7 +39,13 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     // Initialize Hasab AI SDK
-    _hasab = HasabAI(apiKey: 'HASAB_KEY_we4C2GPjbWXB2RJ0B2dh5Cit1QL02I');
+    // Option 1: Using API key directly
+    // _hasab = HasabAI(apiKey: 'your-api-key-here');
+
+    // Option 2: Using environment variables (recommended for production)
+    // Make sure to set HASAB_API_KEY environment variable
+    _hasab = HasabAI.fromEnvironment();
+
     _checkPermissions();
   }
 

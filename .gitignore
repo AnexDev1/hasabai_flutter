@@ -43,3 +43,32 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Environment variables and secrets
+.env
+.env.local
+.env.production
+.env.staging
+
+# API keys and sensitive configuration
+**/secrets/**
+*.key
+*.pem
+*.p12
+*.jks
+
+# Test files with sensitive data
+test_audio.m4a
+test_curl_stt.dart
+test_tts_speakers.dart
+
+# IDE and editor files
+.vscode/settings.json
+.idea/workspace.xml
+*.suo
+*.user
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini

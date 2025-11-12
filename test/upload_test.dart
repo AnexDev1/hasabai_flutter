@@ -5,10 +5,19 @@ import 'package:dio/dio.dart';
 void main() async {
   print('🧪 Testing Hasab AI Upload Endpoint\n');
 
+  // Use environment variable or skip if not available
+  final apiKey = Platform.environment['HASAB_API_KEY'];
+  if (apiKey == null || apiKey.isEmpty) {
+    print(
+      '⚠️  Skipping upload test: HASAB_API_KEY environment variable not set',
+    );
+    return;
+  }
+
   final dio = Dio();
   dio.options.baseUrl = 'https://api.hasab.co/api';
   dio.options.headers = {
-    'Authorization': 'Bearer HASAB_KEY_we4C2GPjbWXB2RJ0B2dh5Cit1QL02I',
+    'Authorization': 'Bearer $apiKey',
     'Accept': 'application/json',
   };
 

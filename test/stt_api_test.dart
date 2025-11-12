@@ -2,8 +2,15 @@ import 'dart:io';
 import 'package:hasab_ai_flutter/hasab_ai_flutter.dart';
 
 void main() async {
+  // Use environment variable or skip if not available
+  final apiKey = Platform.environment['HASAB_API_KEY'];
+  if (apiKey == null || apiKey.isEmpty) {
+    print('⚠️  Skipping test: HASAB_API_KEY environment variable not set');
+    return;
+  }
+
   // Initialize Hasab AI
-  final hasab = HasabAI(apiKey: 'HASAB_KEY_we4C2GPjbWXB2RJ0B2dh5Cit1QL02I');
+  final hasab = HasabAI(apiKey: apiKey);
 
   print('🎤 Hasab AI Speech-to-Text API Test\n');
 

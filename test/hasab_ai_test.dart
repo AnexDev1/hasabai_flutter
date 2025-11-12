@@ -1,12 +1,18 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hasab_ai_flutter/hasab_ai_flutter.dart';
+import 'dart:io' show Platform;
 
 void main() {
   late HasabAI hasab;
 
   setUpAll(() {
-    // Initialize with the actual API key
-    hasab = HasabAI(apiKey: 'HASAB_KEY_zeU0WiO5jKwXXMb3wxjnmd3GtUOJ0i');
+    // Skip tests if API key is not available
+    final apiKey = Platform.environment['HASAB_API_KEY'];
+    if (apiKey == null || apiKey.isEmpty) {
+      hasab = HasabAI(apiKey: 'test-key'); // Use dummy key for unit tests
+    } else {
+      hasab = HasabAI(apiKey: apiKey);
+    }
   });
 
   tearDownAll(() {

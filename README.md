@@ -43,12 +43,36 @@ flutter pub get
 
 Sign up at [hasab.co](https://hasab.co) to get your API key.
 
-### 2. Initialize the SDK
+### 2. Environment Setup (Recommended)
+
+For security, we recommend using environment variables instead of hardcoding API keys:
+
+1. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit `.env` and add your API key:
+   ```env
+   HASAB_API_KEY=your_actual_api_key_here
+   ```
+
+3. Initialize the SDK using environment variables:
+   ```dart
+   import 'package:hasab_ai_flutter/hasab_ai_flutter.dart';
+
+   // Initialize using environment variables (recommended)
+   final hasab = HasabAI.fromEnvironment();
+   ```
+
+### 3. Direct Initialization (Alternative)
+
+You can also initialize directly with your API key:
 
 ```dart
 import 'package:hasab_ai_flutter/hasab_ai_flutter.dart';
 
-// Initialize once in your app
+// Initialize with API key directly
 final hasab = HasabAI(apiKey: 'your-api-key-here');
 ```
 

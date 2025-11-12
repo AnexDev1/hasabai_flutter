@@ -2,13 +2,15 @@
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:io';
 
 /// Simple integration test to verify Hasab AI API connectivity
 /// This runs without Flutter dependencies
 void main() async {
   print('🚀 Testing Hasab AI API Connection\n');
 
-  final apiKey = 'HASAB_KEY_we4C2GPjbWXB2RJ0B2dh5Cit1QL02I';
+  final apiKey =
+      Platform.environment['HASAB_API_KEY'] ?? 'demo-key-for-testing';
   final baseUrl = 'https://hasab.co/api/v1';
 
   final headers = {

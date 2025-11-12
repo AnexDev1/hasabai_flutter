@@ -11,11 +11,7 @@ topics:
   - speech-to-text
   - text-to-speech
   - translation
-  - chat
   - ethiopian-languages
-  - amharic
-  - oromo
-  - tigrinya
 
 environment:
   sdk: ^3.9.2

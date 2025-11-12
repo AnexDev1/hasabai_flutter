@@ -1,9 +1,19 @@
+import 'dart:io';
 import '../lib/src/hasab_ai.dart';
 import '../lib/src/models/language.dart';
 
 /// Debug script to see actual API responses
 void main() async {
-  final hasab = HasabAI(apiKey: 'HASAB_KEY_we4C2GPjbWXB2RJ0B2dh5Cit1QL02I');
+  // Use environment variable or skip if not available
+  final apiKey = Platform.environment['HASAB_API_KEY'];
+  if (apiKey == null || apiKey.isEmpty) {
+    print(
+      '⚠️  Skipping debug script: HASAB_API_KEY environment variable not set',
+    );
+    return;
+  }
+
+  final hasab = HasabAI(apiKey: apiKey);
 
   print('\n=== Testing Chat ===');
   try {
