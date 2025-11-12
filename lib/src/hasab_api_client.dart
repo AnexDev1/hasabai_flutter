@@ -19,7 +19,6 @@ class HasabApiClient {
   /// Create a new Hasab API client
   ///
   /// [apiKey] Your Hasab AI API key
-  /// [baseUrl] Optional custom base URL (defaults to https://api.hasab.co/api)
   HasabApiClient({required this.apiKey}) {
     _dio = Dio(
       BaseOptions(
