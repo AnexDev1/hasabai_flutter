@@ -50,7 +50,6 @@ class HasabAI {
   /// Create a new Hasab AI instance
   ///
   /// [apiKey] Your Hasab AI API key
-  /// [baseUrl] Optional custom base URL (defaults to https://hasab.co/api/v1)
   HasabAI({required String apiKey}) : _client = HasabApiClient(apiKey: apiKey) {
     speechToText = SpeechToTextService(_client);
     textToSpeech = TextToSpeechService(_client);
