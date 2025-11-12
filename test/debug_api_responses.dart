@@ -1,6 +1,6 @@
 import 'dart:io';
-import '../lib/src/hasab_ai.dart';
-import '../lib/src/models/language.dart';
+import 'package:hasab_ai_flutter/src/hasab_ai.dart';
+import 'package:hasab_ai_flutter/src/models/language.dart';
 
 /// Debug script to see actual API responses
 void main() async {

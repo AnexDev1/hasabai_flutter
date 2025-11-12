@@ -541,7 +541,7 @@ class _TextToSpeechDemoState extends State<TextToSpeechDemo> {
           const SizedBox(height: 16),
           if (_getSpeakersForLanguage().isNotEmpty)
             DropdownButtonFormField<String>(
-              value: _selectedSpeaker,
+              initialValue: _selectedSpeaker,
               decoration: const InputDecoration(
                 labelText: 'Voice/Speaker (Optional)',
                 border: OutlineInputBorder(),
@@ -556,7 +556,7 @@ class _TextToSpeechDemoState extends State<TextToSpeechDemo> {
                     value: speaker,
                     child: Text(speaker),
                   );
-                }).toList(),
+                }),
               ],
               onChanged: (value) {
                 setState(() {

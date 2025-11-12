@@ -21,8 +21,7 @@ void main() async {
   // Test 1: Translation (try different endpoints)
   print('📝 Test 1: Text Translation Service');
 
-  // The API docs show translation is primarily for audio via /upload-audio
-  // Let's test if there's a text-only endpoint
+  // Check if text-only translation endpoints exist
   bool translationSuccess = false;
 
   for (final endpoint in ['/translate', '/translations/create', '/chat']) {

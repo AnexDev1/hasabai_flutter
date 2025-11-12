@@ -188,15 +188,15 @@ class HasabApiClient {
 
       // Debug: Log the actual FormData fields
       print('📤 FormData fields:');
-      formData.fields.forEach((field) {
+      for (var field in formData.fields) {
         print('   ${field.key}: ${field.value} (${field.value.runtimeType})');
-      });
+      }
       print('📤 FormData files:');
-      formData.files.forEach((file) {
+      for (var file in formData.files) {
         print(
           '   ${file.key}: ${file.value.filename} (${file.value.length} bytes)',
         );
-      });
+      }
 
       final response = await _dio.post(
         path,

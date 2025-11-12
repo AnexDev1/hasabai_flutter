@@ -69,8 +69,9 @@ class ChatService {
   }) async {
     try {
       final queryParams = <String, dynamic>{};
-      if (conversationId != null)
+      if (conversationId != null) {
         queryParams['conversation_id'] = conversationId;
+      }
       if (limit != null) queryParams['limit'] = limit;
       if (offset != null) queryParams['offset'] = offset;
 
