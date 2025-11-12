@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:hasab_ai_flutter/src/core/constants.dart';
 import 'package:path_provider/path_provider.dart';
 import 'models/hasab_exception.dart';
 
@@ -8,9 +9,6 @@ import 'models/hasab_exception.dart';
 class HasabApiClient {
   /// The API key for authentication
   final String apiKey;
-
-  /// Base URL for Hasab AI API
-  final String baseUrl;
 
   /// Dio instance for HTTP requests
   late final Dio _dio;
@@ -21,14 +19,10 @@ class HasabApiClient {
   /// Create a new Hasab API client
   ///
   /// [apiKey] Your Hasab AI API key
-  /// [baseUrl] Optional custom base URL (defaults to https://api.hasab.co/api)
-  HasabApiClient({
-    required this.apiKey,
-    this.baseUrl = 'https://api.hasab.co/api',
-  }) {
+  HasabApiClient({required this.apiKey}) {
     _dio = Dio(
       BaseOptions(
-        baseUrl: baseUrl,
+        baseUrl: hasabApiBaseUrl,
         connectTimeout: defaultTimeout,
         receiveTimeout: const Duration(
           minutes: 2,
@@ -188,15 +182,15 @@ class HasabApiClient {
 
       // Debug: Log the actual FormData fields
       print('📤 FormData fields:');
-      formData.fields.forEach((field) {
+      for (var field in formData.fields) {
         print('   ${field.key}: ${field.value} (${field.value.runtimeType})');
-      });
+      }
       print('📤 FormData files:');
-      formData.files.forEach((file) {
+      for (var file in formData.files) {
         print(
           '   ${file.key}: ${file.value.filename} (${file.value.length} bytes)',
         );
-      });
+      }
 
       final response = await _dio.post(
         path,
